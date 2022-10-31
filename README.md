@@ -75,3 +75,32 @@
 | Cart |![Cart](https://user-images.githubusercontent.com/70960594/198539958-2ad4bf52-e89e-4c8b-91fa-d9726a47d78a.gif)| - | **FRONT-END** </br> `최현` </br> **BACK-END** </br> `박은송` | 
 |Navigation Bar & Search |![Search](https://user-images.githubusercontent.com/70960594/198539983-01ee0550-00eb-4a9f-ab5b-fd2c4a6c6ed6.gif)| - 검색 모달창 구현 | **FRONT-END**</br> `강은지` </br> **BACK-END** </br> `이현태`  |
 
+
+
+### 구현 사항 설명 (담당 구현 요소)
+
+#### Navigation Bar, Search (제품 검색)
+- 각각의 페이지로 이동하기 위해 Routing 설정을 하여 navigation bar를 구성했습니다.
+- 각각의 아이콘을 클릭 시 `찾기`, `장바구니`, `로그인` 페이지로 이동합니다.
+- `찾기` 아이콘 클릭 시 컴포넌트로 분리한 모달 창을 띄웁니다.
+- 모달창에는 상품을 검색하기 위한 `input`과 검색 결과를 보여주는 상품들로 구성했습니다.
+- `fetch`로 받아오는 전체 데이터를 `filter`메소드를 사용해서 input의 state 값이 상품이름의 값을 포함하고 있는 데이터만 반환해서 보여주도록 하였습니다.
+
+#### 상품 상세페이지 (+ 장바구니에 상품 추가)
+- 상품의 상세페이지는 이미지와, 상품정보(이름, 가격, 사이즈 옵션, 상세정보)로 레이아웃을 구성했습니다.
+- 사이즈 버튼은 `input`을 사용해서 radio type으로 설정하고 사이즈는 하나만 선택되게 했습니다. 
+- 사이즈 stock이 1보다 작으면 버튼을 disabled로 하고 클릭이 되지 않게 했습니다.
+- 장바구니 버튼 클릭 시 상품의 선택한 `size`와 `productId`를 POST method로 데이터를 전송하고 장바구니 테이블에 추가되게 구현했습니다. (장바구니에 추가 시, 모달을 띄우고 2.75초뒤 사라지게 구현했습니다.)
+- 상품의 상세정보는 컴포넌트로 분리해서 아코디언 메뉴로 구현했습니다. 
+- `currentMenuIdx`라는 state 값이 메뉴의 `index`와 같으면(true) `active` 클래스네임을 추가합니다.
+- 메뉴가 open되고 상품의 상세정보를 확인할 수 있습니다.
+
+#### Carousel
+- `currentSlide` state 값은 0으로 초기화하고, next 버튼을 클릭시 1씩 추가됩니다.
+- 반대로 prev 버튼 클릭 시 1씩 마이너스가 됩니다. currentSlide가 0 일 때는 버튼 클릭이 비활성화 됩니다.
+- `currentSlide`의 state 값은 슬라이드를 감싸고 있는 `<div className: "slidesWrap">`의 스타일 적용에 사용됩니다.  --> `transform: translateX(-${currentSlide * 100}%)`
+- 한 슬라이드에 제품을 3개씩 보여주기 위해서 한 제품 당 `width`값을 33.33%로 적용했습니다.
+- pagination을 구현하기 위해 빈배열에 bullet 갯수를 넣고 `currentSlide`값이 bullet의 `index` 값과 같을 때 `active` 클래스네임을 추가합니다.
+
+
+
